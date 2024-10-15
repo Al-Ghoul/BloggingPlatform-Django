@@ -1,0 +1,5 @@
+[[commands]]
+package = "python3"
+
+[[commands]]
+package = "poetry"
