@@ -4,7 +4,7 @@ Blogging Platform API's A personal blogging platform RESTful API.
 
 Project URL: https://roadmap.sh/projects/blogging-platform-api
 
-For DB schema see [main/README.md](main/README.md)
+For DB schema see [main/README.md](blog/main/README.md)
 ## Development \[Nix\]
 
 ```bash
