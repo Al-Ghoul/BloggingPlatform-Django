@@ -8,29 +8,20 @@ from rest_framework import (
 )
 from rest_framework.response import Response
 from .serializers import PostSerializer, UserSerializer
-from .models import Post
+from .models import User, Post
 from rest_framework.pagination import CursorPagination
+
 
 class PostCursorSetPagination(CursorPagination):
     page_size = 5
-    page_size_query_param = 'page_size'
-    ordering = '-created_at'
+    page_size_query_param = "page_size"
+    ordering = "-created_at"
 
 
-class UserViewSet(viewsets.ViewSet):
-    def get_permissions(self):
-        """
-        Instantiates and returns the list of permissions that this view requires.
-        """
-        permission_classes = [permissions.AllowAny]
-        return [permission() for permission in permission_classes]
-
-    def create(self, request):
-        serializer = UserSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class UserCreate(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [permissions.AllowAny]
 
 
 class PostViewSet(viewsets.ViewSet, generics.ListAPIView, generics.RetrieveAPIView):
@@ -49,7 +40,6 @@ class PostViewSet(viewsets.ViewSet, generics.ListAPIView, generics.RetrieveAPIVi
     filter_backends = [filters.SearchFilter]
     search_fields = ["title", "content", "category"]
     pagination_class = PostCursorSetPagination
-
 
     def create(self, request):
         serializer = self.serializer_class(data=request.data)

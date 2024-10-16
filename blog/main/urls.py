@@ -4,10 +4,10 @@ from django.urls import path, include
 
 
 router = DefaultRouter()
-router.register(r"users", views.UserViewSet, basename="user")
 router.register(r"posts", views.PostViewSet, basename="post")
 
 
 urlpatterns = [
-    path("", include(router.urls)),
+    path("api/", include(router.urls)),
+    path("api/users/", views.UserCreate.as_view(), name="user-create"),
 ]
