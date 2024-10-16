@@ -19,3 +19,13 @@ class User(AbstractBaseUser):
     USERNAME_FIELD = "email"
 
     objects = UserManager()
+
+
+class Post(models.Model):
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    category = models.CharField(max_length=200)
+    tags = models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
