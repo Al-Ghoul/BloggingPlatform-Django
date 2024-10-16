@@ -1,1 +1,15 @@
 .direnv
+__pycache__
+*.pyc
+*.pyo
+*.so
+*.swp
+*.swo
+*.pyc
+*.pyo
+*.so
+*.swp
+*.swo
+*.log
+
+db.sqlite3
